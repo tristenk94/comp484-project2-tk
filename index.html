@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Your Giga Pet</title>
+    <meta name="description" content="A tamagotchi with Pokemon!">
+    <link id="favicon" rel="icon" href="https://cdn.glitch.com/d8834e34-f73c-4d66-ab08-1e2dca09d3b5%2Fpokeball.png?v=1604470399628" type="image/x-icon">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.11.1/jquery-ui.min.js"></script>
+    
+    <script src="script.js" defer></script>
+        
+    <link rel="stylesheet" href="style.css">
+    
+  </head>
+  <body>
+    <header>
+      <h1> <!--adds user's name here! -->
+        This is your Giga Pet:&nbsp;<span id="pN"></span>
+      </h1>
+    </header>
+    
+  
+    <main>
+      <section id="chooseYourStarter" class="allStarter">  <!-- initial section that holds the 'intro' section -->
+        <h2>
+          <p>
+            Choose Your Starter!
+          </p>
+        </h2>
+        <div> <!-- choice menu. Note imgs are manually resized, i was having much difficulty applying css to automatically select. -->
+            <form> <!-- using radio form -->
+               <div class="bulba"> <!--Option for bulbasaur-->
+                   <input type="radio" name="choice" value="Bulbasaur">Bulbasaur <!-- probabbly make it float and resize image, use single ones too-->
+                   <!--nh-->
+                  <img id="bulbaNH" class="allStarterImages" width="100" height="100" src="https://cdn.glitch.com/d8834e34-f73c-4d66-ab08-1e2dca09d3b5%2Fbulba%20nohighllight.jpg?v=1604192584138">
+                    <!--h-->
+                  <img id="bulbaH" class="bulbaH" width="100" height="100" src="https://cdn.glitch.com/d8834e34-f73c-4d66-ab08-1e2dca09d3b5%2Fbulba%20highlight.jpg?v=1604191624867">
+              </div>
+              
+              <div class="charm"> <!--Option for charmander-->
+                    <input type="radio" name="choice" value="Charmander"> Charmander
+                   <!--nh-->
+                  <img id="charmNH" class="allStarterImages" width="100" height="100" src="https://cdn.glitch.com/d8834e34-f73c-4d66-ab08-1e2dca09d3b5%2Fcharm%20nohighllight.jpg?v=1604192584138">
+                    <!--h-->
+                  <img id="charmH" class="charmH" width="100" height="100" src="https://cdn.glitch.com/d8834e34-f73c-4d66-ab08-1e2dca09d3b5%2Fcharm%20highlight.jpg?v=1604191624867">
+              </div>
+              
+              <div class="squirt"> <!--Option for squirtle-->
+                  <input type="radio" name="choice" value="Squirtle"> Squirtle
+                   <!--nh-->
+                  <img id="squirtNH" class="allStarterImages" width="100" height="100" src="https://cdn.glitch.com/d8834e34-f73c-4d66-ab08-1e2dca09d3b5%2Fsquirtle%20nohighlight.jpg?v=1604192584138">
+                    <!--h-->
+                  <img id="squirtH" class="squirtH" width="100" height="100" src="https://cdn.glitch.com/d8834e34-f73c-4d66-ab08-1e2dca09d3b5%2Fsquirtle%20highlight.jpg?v=1604191624867">
+              </div>
+          
+              <!--selection button, prompts user to double check -->
+              <button type="button" onclick="askPetName()" id="btn">I choose you!</button>
+                   
+            </form><!-- end of radio form -->
+        </div> <!-- end of choice menu -->
+        </section> <!-- end of initial intro section -->
+      
+      
+      
+      <!-- different button to confirm selection, seperated from above section to not be affected by the css -->
+        <button class="preNameButton" type="button" onclick="preload()" id="dblCheck" padding: 0>Are you Sure?</button>
+      
+      
+      <section class="pet-image-container" id="loaded"> <!-- the image container -->
+         <!-- Replaces based on user's choice -->
+        <div id="petIMG" class="pet-image"></div>
+      </section>
+      
+      <section class="dashboard hidden" id="loaded2"> <!-- the dashboard for with pet -->
+        <!-- all the info about pet -->
+        <div>Name: <strong><span class="name"></span></strong></div> <!-- may update after first action due to initialization -->
+        <div>Weight: <strong><span class="weight"></span> pounds</strong></div>
+        <div>Happiness: <strong><span class="happiness"></span> tail wags (per min)</strong></div>
+        <div>Cleanliness: <strong><span class="cleanliness"></span> clean units</strong></div>
+  
+        <div class="button-container"> <!-- buttons to interact with pet-->
+          <button class="treat-button">
+            Treat
+          </button>
+          <button class="play-button">
+            Play
+          </button>
+          <button class="exercise-button">
+            Exercise
+          </button>
+           <button class="bathe-button">
+            Bathe
+          </button>
+        </div>
+        </section> <!-- end of pet dashboard -->
+      
+     
+      <section class="hidden" id="loaded3"> <!-- pet comment box, tells you what pet is thinking/talking about -->
+        <br> <!--br helps with spacing with float -->
+        <strong><span class="previousAction" id="pN2">says: </span></strong> <!--petname says box, left says: here as a placeholder -->
+        <br> <!--br gives a space to go on top of the box -->
+        <div class="commentBox"> <!-- where the box is drawn-->
+        <p id="petTalk"></p> <!-- the pet's comments is populated here -->
+        </div> <!-- end of the drawn pet comment box -->
+      </section> <!-- end of pet comment box section -->
+      
+       <section class="hidden" id="loaded4"> <!-- quick section to inform the user of the last action taken -->
+        <div>Previous Action: <strong><span id="prevAction"></span></strong></div>
+      </section>
+      
+    </main><!-- main -->
+
+    <!-- Your web-app is https, so your scripts need to be too -->
+    <script src="https://code.jquery.com/jquery-2.2.1.min.js"
+            integrity="sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00="
+            crossorigin="anonymous"></script>
+    
+  </body> <!-- end of pet body of site -->
+</html> <!-- site code -->
